@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCS 모의고사 - 실전 문제풀이</title>
+    <link rel="stylesheet" href="ncs_exam.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 사이드바 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>📚 NCS 모의고사</h2>
+                <p style="font-size: 0.8em; opacity: 0.9;">실전 연습</p>
+            </div>
+            <div class="exam-info">
+                <div><strong>남은 시간</strong><span id="timer-display">60:00</span></div>
+                <div><strong>풀이</strong><span><span id="solved">0</span>/30</span></div>
+                <div><strong>정답률</strong><span id="accuracy">0%</span></div>
+            </div>
+            <div class="problem-list" id="problem-list"></div>
+        </div>
+
+        <!-- 메인 -->
+        <div class="main-content">
+            <div class="header">
+                <h1 id="title">문제를 선택하세요</h1>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button id="wrong-note-btn" class="header-btn" onclick="showWrongNote()" style="display: none;">📝 오답노트 (<span id="wrong-count">0</span>)</button>
+                    <button id="result-btn" class="header-btn" onclick="endExam()" style="display: none;">📊 결과 보기</button>
+                    <div style="font-size: 1.5em; font-weight: bold;">⏱️ <span id="main-timer" class="timer-display">60:00</span></div>
+                </div>
+            </div>
+
+            <div class="problem-area">
+                <div id="problem-view">
+                    <div class="problem-card" style="text-align: center; color: #999; padding: 60px;">
+                        <p style="font-size: 1.2em;">좌측에서 문제를 선택하여 시작하세요</p>
+                    </div>
+                </div>
+                <div id="result-view" class="result-screen"></div>
+                <div id="wrong-note-view" class="result-screen"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 시간 초과 팝업 -->
+    <div id="time-alert" class="modal">
+        <div class="modal-content">
+            <h2>⏱️ 시간 초과!</h2>
+            <p class="time-alert">이 문제에 <span id="alert-time">60</span>초 이상 소요됨</p>
+            <p style="color: #666;">평균 풀이 시간: <strong id="alert-avg">45</strong>초</p>
+            <div style="background: #fff3cd; padding: 15px; border-radius: 6px; margin: 20px 0;">
+                <strong style="color: #856404;">💡 팁:</strong>
+                <p style="color: #856404; margin-top: 8px;">어려운 문제는 빠르게 판단하고 버리세요! NCS는 시간관리가 가장 중요합니다.</p>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-secondary" onclick="closeTimeAlert()">계속 풀기</button>
+                <button class="modal-btn modal-btn-primary" onclick="skipAndClose()">다음 문제</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="ncs_exam.js"></script>
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCS 플랫폼 최종 기능 정의서</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title span {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .subsection {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+        
+        .subsection-title {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .priority-high {
+            background: #fff3cd;
+            color: #856404;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .priority-medium {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .feature-list li {
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-list li:hover {
+            background: #e7eef7;
+            transform: translateX(5px);
+        }
+        
+        .feature-list strong {
+            color: #667eea;
+        }
+        
+        .feature-list em {
+            color: #764ba2;
+        }
+        
+        .highlight {
+            background: #ffeaa7;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h4 {
+            color: #667eea;
+            margin-bottom: 12px;
+            font-size: 1.15em;
+        }
+        
+        .feature-card p {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .summary-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .summary-box p {
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .emoji {
+            font-size: 1.3em;
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            header {
+                padding: 30px 20px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 NCS 플랫폼 최종 기능 정의서</h1>
+            <p>수험생 맞춤형 AI 과외 선생님 플랫폼</p>
+        </header>
+        
+        <div class="content">
+            <!-- 소개 섹션 -->
+            <div class="section">
+                <div class="subsection">
+                    <p>수험생들이 겪는 <strong>시간 관리 실패</strong>와 <strong>비슷한 유형의 반복 오답</strong> 문제를 해결하기 위해 기획된 NCS 플랫폼입니다.</p>
+                    <p style="margin-top: 15px;">개발, 디자인, 기획의 기준점으로 활용하실 수 있도록 체계적으로 구성했습니다.</p>
+                </div>
+            </div>
+            
+            <!-- 1. 회원 및 대시보드 관리 -->
+            <div class="section">
+                <div class="section-title">
+                    <span>1</span>
+                    회원 및 대시보드 관리 (User & Dashboard)
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>기능 ID</th>
+                            <th>기능명</th>
+                            <th>상세 설명</th>
+                            <th>우선순위</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>USR-01</strong></td>
+                            <td>맞춤형 목표 설정</td>
+                            <td>회원가입 시 <span class="highlight">지원 공기업(예: 한전, 코레일) 및 직렬(사무/기술)</span>을 선택하여 맞춤형 데이터 제공</td>
+                            <td><span class="priority-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>USR-02</strong></td>
+                            <td>개인별 대시보드</td>
+                            <td>최근 성적 추이, 평균 풀이 시간, 취약 영역 파트, 오답 노트 누적 개수를 한눈에 확인</td>
+                            <td><span class="priority-high">High</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- 2. 실전 모의고사 및 CBT 풀이 모듈 -->
+            <div class="section">
+                <div class="section-title">
+                    <span>2</span>
+                    실전 모의고사 및 CBT 풀이 모듈 (Time Management)
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">⚠️ 해결 과제</div>
+                    <p>시간 부족 및 과도한 문항 집착 방지</p>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>기능 ID</th>
+                            <th>기능명</th>
+                            <th>상세 설명</th>
+                            <th>우선순위</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>CBT-01</strong></td>
+                            <td>백그라운드 타이머 &amp; 실시간 리포트</td>
+                            <td>전체 시험 시간뿐만 아니라 문항별 소요 시간을 초 단위로 자동 백그라운드 로깅</td>
+                            <td><span class="priority-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>CBT-02</strong></td>
+                            <td>AI 페이스 메이커 (경고 알림)</td>
+                            <td>특정 문항에서 본인의 평균 풀이 시간보다 일정 시간 이상 지체 시, 화면 미세 시각 효과로 시간 지체 경고</td>
+                            <td><span class="priority-medium">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>CBT-03</strong></td>
+                            <td>패스 스캐너 (PASS 버튼)</td>
+                            <td>문제 풀이 화면 중앙에 [PASS / 버리기] 버튼을 직관적으로 배치하여 과감한 포기 훈련 유도</td>
+                            <td><span class="priority-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>CBT-04</strong></td>
+                            <td>실전/연습 모드 분기</td>
+                            <td>실시간 타이머가 작동하는 '실전 모드'와 즉시 정답 및 해설을 보는 '연습 모드' 선택 제공</td>
+                            <td><span class="priority-high">High</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- 3. 오답 및 AI 약점 분석 리포트 -->
+            <div class="section">
+                <div class="section-title">
+                    <span>3</span>
+                    오답 및 AI 약점 분석 리포트 (Error Correction)
+                </div>
+                
+                <div class="subsection">
+                    <div class="subsection-title">⚠️ 해결 과제</div>
+                    <p>비슷한 유형의 지속적 오답 및 수동적인 오답 정리의 한계 극복</p>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>기능 ID</th>
+                            <th>기능명</th>
+                            <th>상세 설명</th>
+                            <th>우선순위</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>REP-01</strong></td>
+                            <td>시간 낭비 구간 시각화 리포트</td>
+                            <td>시험 종료 후 "어떤 파트/어떤 문항에서 가장 시간을 많이 썼는지" 그래프로 직관적 피드백</td>
+                            <td><span class="priority-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>REP-02</strong></td>
+                            <td>오답 원인 태깅 시스템</td>
+                            <td>오답 노트 적재 시 단순 채점이 아닌 <span class="highlight">오답 원인(① 개념 부족, ② 계산 실수, ③ 조건 해석 오류, ④ 시간 부족)</span>을 강제 태깅</td>
+                            <td><span class="priority-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>REP-03</strong></td>
+                            <td>AI 쌍둥이(Clone) 문제 생성</td>
+                            <td>틀린 문항의 유형, 조건, 숫자를 변형하여 동일 원리의 유사 문제 3개를 자동 생성하여 즉시 풀이 연동</td>
+                            <td><span class="priority-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>REP-04</strong></td>
+                            <td>망각 곡선 맞춤 복습 알림</td>
+                            <td>에빙하우스 망각 곡선 기반(1일, 3일, 7일 주기), 오답 노트 내 문항을 랜덤 재출제하는 자동 복습 시스템</td>
+                            <td><span class="priority-medium">Medium</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- 4. 기출 및 콘텐츠 뱅크 -->
+            <div class="section">
+                <div class="section-title">
+                    <span>4</span>
+                    기출 및 콘텐츠 뱅크 (Content Management)
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>기능 ID</th>
+                            <th>기능명</th>
+                            <th>상세 설명</th>
+                            <th>우선순위</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>CON-01</strong></td>
+                            <td>대행사/기업별 문제 필터링</td>
+                            <td>휴노형, PSAT형, 피듈형 등 출제 대행사 및 기업별 특성에 맞춘 문항 검색 및 세트 구성</td>
+                            <td><span class="priority-high">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>CON-02</strong></td>
+                            <td>유저 복원 뱅크 (커뮤니티 연동)</td>
+                            <td>수험생들이 시험 후 기억을 더듬어 입력한 기출 복원 문항을 검수 후 플랫폼에 등록하는 크라우드 소싱 기능</td>
+                            <td><span class="priority-medium">Medium</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- AI 기반 4가지 핵심 기능 -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="emoji">🤖</span>
+                    AI 기반 핵심 기능 상세 설명
+                </div>
+                
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <h4>1️⃣ 문항별 '타임어택' 및 페이스 메이커 기능 (시간 관리 해결)</h4>
+                    <p>NCS는 문제를 못 푸는 것보다 <strong>'시간 배분을 잘못해서 뒤의 쉬운 문제를 못 푸는 것'</strong>이 더 큰 문제입니다.</p>
+                    
+                    <ul class="feature-list">
+                        <li>
+                            <strong>🕐 실시간 문항별 소요 시간 추적</strong><br>
+                            문제를 풀 때 단순히 전체 시험 시간이 줄어드는 게 아니라, <em>[1번 문항: 45초 / 2번 문항(자료해석): 2분 15초]</em>처럼 각 문제당 몇 초를 썼는지 백그라운드로 기록하는 기능입니다.
+                        </li>
+                        <li>
+                            <strong>⚠️ 시간 지체 경고 (알람)</strong><br>
+                            특정 유형(예: 응용수리, 조건추리)에서 평소 자기 평균 풀이 시간보다 30초 이상 지체되고 있으면 화면 미세 진동이나 시각 효과로 <em>"지금 이 문제 넘어가기!"</em>를 알려주는 페이스 메이커 기능.
+                        </li>
+                        <li>
+                            <strong>📊 구간별 타임 리포트</strong><br>
+                            모의고사 종료 후, <em>"나는 자료해석 첫 페이지에서 시간을 너무 많이 뺏겼다"</em>를 그래프로 시각화해 주는 분석 리포트 제공.
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <h4>2️⃣ AI 기반 '유형 클론(Clone)' 쌍둥이 문제 생성 (반복 오답 해결)</h4>
+                    <p>비슷한 유형을 계속 틀리는 이유는 <strong>'내 약점의 본질'을 모른 채 해설만 보고 넘어가기</strong> 때문입니다.</p>
+                    
+                    <ul class="feature-list">
+                        <li>
+                            <strong>🏷️ 오답 원인 태깅</strong><br>
+                            틀렸을 때 단순 정답 확인이 아니라 오답 이유를 강제로 선택하게 합니다. (예: ① 개념/공식 부족, ② 계산 실수, ③ 조건/보기 해석 오류, ④ 시간 부족으로 찍음)
+                        </li>
+                        <li>
+                            <strong>✨ AI 유사 문항(쌍둥이 문제) 자동 출제</strong><br>
+                            사용자가 특정 유형(예: NCS 수리능력 중 '농도 문제' 또는 '가중평균 자료해석')을 틀리면, 플랫폼이 그 문제의 숫자, 조건, 맥락만 바꾼 쌍둥이 문제(유사 문제) 3개를 즉시 생성하여 오답고사로 던져주는 기능입니다. 같은 유형에서 틀리지 않을 때까지 반복 훈련시킵니다.
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <h4>3️⃣ '버릴 문제(Pass)' 스캐너 및 과감성 훈련 모드</h4>
+                    <p>NCS 고득점자의 핵심 노하우는 <strong>"어려운 문제를 빠르게 버리는 것"</strong>입니다. 하지만 수험생들은 오기가 생겨 붙잡고 있다가 망합니다.</p>
+                    
+                    <ul class="feature-list">
+                        <li>
+                            <strong>🎯 실전 패스(Pass) 연습 모드</strong><br>
+                            모의고사 모드에서 문제를 풀 때, 정답을 고르는 것 외에 <em>[넘기기(Pass)]</em> 버튼을 눈에 띄게 배치합니다.
+                        </li>
+                        <li>
+                            <strong>📈 과감성 평가 리포트</strong><br>
+                            <em>"이 문제는 풀었으나 3분 이상 걸려 '기회비용'상 틀린 것과 다름없음"</em><br>
+                            <em>"이 문제는 10초 만에 잘 버렸음(성공)"</em><br>
+                            처럼 수험생의 '문제 선구안(버릴 문제를 고르는 능력)'을 점수화해서 피드백해 주는 기능입니다.
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <h4>4️⃣ 나만의 '약점 오답 노트' 자동화 & 복습 주기 관리</h4>
+                    <p>손으로 오답 노트를 적는 것은 시간이 너무 오래 걸립니다.</p>
+                    
+                    <ul class="feature-list">
+                        <li>
+                            <strong>💾 원클릭 오답 수납</strong><br>
+                            틀린 문제는 버튼 하나로 나만의 '오답 폴더'에 자동 적재되며, 내가 태그한 오답 원인별로 분류됩니다.
+                        </li>
+                        <li>
+                            <strong>🔄 망각 곡선 맞춤 복습 알림</strong><br>
+                            에빙하우스 망각 곡선에 기반해 <em>[틀린 지 1일 뒤, 3일 뒤, 7일 뒤]</em>에 해당 오답 문제들이 다시 랜덤으로 출제되어 내 기억에 완전히 박힐 때까지 트래킹해 주는 시스템.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 요약 -->
+            <div class="summary-box">
+                <h3>💡 플랫폼 콘셉트 요약</h3>
+                <p>만드시려는 플랫폼은 단순히 <strong>문제를 풀고 채점해 주는 곳</strong>이 아니라,</p>
+                <p style="margin-left: 20px; color: #764ba2; font-weight: 600;">
+                    "너 이 문제에서 시간 낭비했어", "너 저번에 틀렸던 농도 문제랑 똑같은 유형이야, 이거 풀어봐"
+                </p>
+                <p>라고 옆에서 콕콕 짚어주는 <strong>개인 맞춤형 AI 과외 선생님 같은 콘셉트</strong>로 가시면, 수험생들에게 폭발적인 반응을 얻을 수 있을 것입니다!</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 NCS Platform Specification | 개발, 디자인, 기획의 기준점으로 활용하세요.</p>
+        </footer>
+    </div>
+</body>
+</html>
